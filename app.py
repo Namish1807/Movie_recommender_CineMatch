@@ -1,9 +1,40 @@
 import streamlit as st
 import joblib
 import requests
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
-df = joblib.load("movies_data.pkl") 
-final_similarity = joblib.load("final_similarity.pkl")
+df = joblib.load("movies_data.pkl")
+
+@st.cache_resource
+def load_similarity():
+    tfidf = TfidfVectorizer(stop_words="english")
+
+    tf_idf_matrix_overview = tfidf.fit_transform(df["overview"].fillna(""))
+    similarity_matrix_overview = cosine_similarity(tf_idf_matrix_overview)
+
+    tf_idf_matrix_genres = tfidf.fit_transform(df["genres"].fillna(""))
+    similarity_matrix_genres = cosine_similarity(tf_idf_matrix_genres)
+
+    tf_idf_matrix_keywords = tfidf.fit_transform(df["keywords"].fillna(""))
+    similarity_matrix_keywords = cosine_similarity(tf_idf_matrix_keywords)
+
+    tf_idf_matrix_crew = tfidf.fit_transform(df["crew"].fillna(""))
+    similarity_matrix_crew = cosine_similarity(tf_idf_matrix_crew)
+
+    tf_idf_matrix_cast = tfidf.fit_transform(df["cast"].fillna(""))
+    similarity_matrix_cast = cosine_similarity(tf_idf_matrix_cast)
+
+    final_similarity = (
+        0.35 * similarity_matrix_overview +
+        0.25 * similarity_matrix_genres +
+        0.20 * similarity_matrix_keywords +
+        0.15 * similarity_matrix_crew +
+        0.05 * similarity_matrix_cast
+    )
+    return final_similarity
+
+final_similarity = load_similarity()
 
 def recommend(movie_name, no_of_movies):
 
