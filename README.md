@@ -1,53 +1,96 @@
-# Movie Recommendation System
+# 🎬 CineMatch — Movie Recommendation System
 
-A content-based movie recommendation system built using Python, Pandas, Scikit-learn, and Streamlit. It recommends similar movies based on movie content and displays movie posters using the TMDB API.
+CineMatch is a **content-based movie recommendation system** built using Python, Pandas, Scikit-learn, and Streamlit. It recommends similar movies based on their content and displays movie posters using the TMDB API.
 
-## Features
+🚀 **Live Demo:** [Open CineMatch](YOUR_STREAMLIT_APP_URL)
+
+## ✨ Features
 
 - Content-based movie recommendations
 - TF-IDF vectorization and cosine similarity
+- Weighted similarity using movie overviews, genres, keywords, cast, and crew
 - User-selectable number of recommendations
 - Movie ratings, genres, and overviews
 - Movie posters fetched using the TMDB API
 - Interactive Streamlit web interface
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- Python
-- Pandas and NumPy
-- Scikit-learn
-- Streamlit
-- Requests
-- TMDB API
+- **Language:** Python
+- **Data Processing:** Pandas, NumPy
+- **Machine Learning:** Scikit-learn
+- **Web App:** Streamlit
+- **API Integration:** Requests, TMDB API
 
-## How It Works
+## ⚙️ How It Works
 
-1. Movie metadata is cleaned and processed.
-2. TF-IDF converts movie text features into numerical vectors.
-3. Cosine similarity measures similarity between movies.
-4. The system returns the most similar movies.
-5. The Streamlit app displays recommendations and movie posters.
+1. Movie metadata is cleaned and preprocessed.
+2. TF-IDF converts selected text features into numerical vectors.
+3. Cosine similarity measures similarity between movies for each feature.
+4. A weighted combination of the feature similarities ranks movies.
+5. The Streamlit application displays recommendations, ratings, genres, overviews, and posters.
 
-## Run Locally
+## 💻 Run Locally
 
-1. Clone this repository.
-2. Create and activate a Python virtual environment.
-3. Install dependencies:
+### 1. Clone the repository
 
-   `pip install -r requirements.txt`
+```bash
+git clone https://github.com/Namish1807/Movie_recommender_CineMatch.git
+cd Movie_recommender_CineMatch
+```
 
-4. Create `.streamlit/secrets.toml` and add your own TMDB API key:
+### 2. Create a virtual environment
 
-   `TMDB_API_KEY = "YOUR_TMDB_API_KEY"`
+```bash
+python -m venv venv
+```
 
-5. Run the application:
+Activate it:
 
-   `streamlit run app.py`
+**Windows**
+```bash
+venv\Scripts\activate
+```
 
-## Dataset
+**macOS / Linux**
+```bash
+source venv/bin/activate
+```
 
-This project uses the TMDB 5000 Movies and Credits datasets.
+### 3. Install dependencies
 
-## Security
+```bash
+pip install -r requirements.txt
+```
 
-Never commit your API key or `.streamlit/secrets.toml` to GitHub.
+### 4. Configure your TMDB API key
+
+Create `.streamlit/secrets.toml` in the project root and add:
+
+```toml
+TMDB_API_KEY = "YOUR_TMDB_API_KEY"
+```
+
+Replace the placeholder with your own TMDB API key.
+
+### 5. Run the application
+
+```bash
+streamlit run app.py
+```
+
+## 📊 Dataset
+
+This project uses the **TMDB 5000 Movies and Credits datasets**, containing movie metadata and credits information.
+
+## 🔐 Security
+
+- Never commit your API key or `.streamlit/secrets.toml` to GitHub.
+- Keep secrets in Streamlit's Secrets settings when deploying.
+- Do not expose API keys in source code or public notebooks.
+
+## 👨‍💻 Author
+
+**Namish Kakade**
+
+[GitHub Repository](https://github.com/Namish1807/Movie_recommender_CineMatch)
